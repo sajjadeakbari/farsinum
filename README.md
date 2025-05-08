@@ -78,3 +78,36 @@ print(f"تعداد پاراگراف‌ها: {count_paragraphs(text)}")
 # تعداد جملات: 4
 # تعداد پاراگراف‌ها: 2
 
+## تبدیل تاریخ میلادی و شمسی
+
+`farsinum` امکان تبدیل بین تاریخ‌های میلادی و شمسی (جلالی) را با استفاده از کتابخانه `jdatetime` فراهم می‌کند و رابط کاربری ساده‌ای برای فرمت‌های رایج ارائه می‌دهد.
+
+```python
+import datetime
+from farsinum import gregorian_to_jalali, jalali_to_gregorian, today_jalali
+
+# تبدیل میلادی به شمسی
+g_date_str = "2023-10-08"
+jalali_date_str = gregorian_to_jalali(g_date_str)
+print(f"{g_date_str} میلادی برابر است با {jalali_date_str} شمسی")
+# خروجی: 2023-10-08 میلادی برابر است با ۱۴۰۲/۰۷/۱۶ شمسی
+
+dt_obj = datetime.date(2024, 2, 29) # سال کبیسه میلادی
+jalali_formatted = gregorian_to_jalali(dt_obj, output_format="%A %d %B %Y", use_persian_numerals=True)
+print(f"تاریخ {dt_obj} به شمسی: {jalali_formatted}")
+# خروجی: تاریخ 2024-02-29 به شمسی: پنجشنبه ۱۰ اسفند ۱۴۰۲ (بسته به لوکیل)
+
+# تبدیل شمسی به میلادی
+j_date_str = "۱۴۰۲/۰۱/۰۱"
+gregorian_date_str = jalali_to_gregorian(j_date_str)
+print(f"{j_date_str} شمسی برابر است با {gregorian_date_str} میلادی")
+# خروجی: ۱۴۰۲/۰۱/۰۱ شمسی برابر است با 2023-03-21 میلادی
+
+gregorian_date_obj = jalali_to_gregorian((1402, 12, 29), output_format=None) # آخرین روز سال ۱۴۰۲ (غیر کبیسه)
+print(f"آخرین روز ۱۴۰۲ به میلادی: {gregorian_date_obj}")
+# خروجی: آخرین روز ۱۴۰۲ به میلادی: 2024-03-19
+
+# تاریخ امروز به شمسی
+print(f"امروز به شمسی: {today_jalali()}")
+print(f"امروز (با فرمت کامل): {today_jalali(output_format='%A، %d %B %Y')}")
+
