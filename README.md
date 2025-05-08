@@ -1,2 +1,19 @@
-# farsinum
-A complete toolkit for converting, formatting, and processing Persian numbers and numeric text.
+# Farsinum (فارسی‌نام)
+
+[![PyPI version](https://badge.fury.io/py/farsinum.svg)](https://badge.fury.io/py/farsinum)
+<!-- بعد از انتشار در PyPI، لینک بالا فعال می‌شود -->
+<!-- می‌توانید بج‌ها و اطلاعات بیشتری اضافه کنید -->
+
+یک کتابخانه پایتون ساده و کارآمد برای کار با اعداد و ارقام فارسی.
+
+این پکیج شامل توابع زیر است:
+*   تبدیل اعداد انگلیسی (یا عربی) به معادل فارسی آن‌ها در یک رشته.
+*   تبدیل اعداد فارسی به معادل انگلیسی (غربی) آن‌ها در یک رشته.
+*   تبدیل اعداد صحیح به حروف فارسی.
+
+## نصب
+
+می‌توانید `farsinum` را با استفاده از pip نصب کنید:
+
+```bash
+pip install farsinum
