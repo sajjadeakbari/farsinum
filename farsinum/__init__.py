@@ -32,6 +32,23 @@ from .sentiment_analyzer import ( # اضافه کردن ماژول جدید
     SentimentLabel, # اگر کاربران بخواهند از این تایپ استفاده کنند
     SentimentScore
 )
+from .sentiment_analyzer import (
+    analyze_sentiment_simple,
+    SentimentLabel,
+    SentimentScore
+)
+from .seo_analyzer import ( # اضافه کردن ماژول جدید
+    SEOResult,
+    check_text_length,
+    check_keyword_density,
+    check_headings_simple,
+    check_readability_simple,
+    run_seo_checklist_on_text,
+    # RECOMMENDED_MIN_WORD_COUNT, # اینها معمولا به عنوان ثابت در __all__ نمی‌آیند
+    # RECOMMENDED_KEYWORD_DENSITY_MIN,
+    # RECOMMENDED_KEYWORD_DENSITY_MAX,
+    # RECOMMENDED_AVG_SENTENCE_LENGTH_MAX
+)
 
 # توابعی که می‌خواهیم با from farsinum import * در دسترس باشند
 __all__ = [
