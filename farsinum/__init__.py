@@ -1,22 +1,25 @@
 # farsinum/__init__.py
 
 """
-Farsinum: یک کتابخانه پایتون برای کار با اعداد، ارقام، متن و تاریخ فارسی.
-شامل توابعی برای تبدیل اعداد، تبدیل عدد به حروف، نرمال‌سازی متن فارسی،
-تحلیل ساده متن و تبدیل تاریخ میلادی/شمسی.
+Farsinum: کتابخانه جامع پایتون برای کار با زبان و داده‌های فارسی.
+شامل تبدیل اعداد، عدد به حروف، نرمال‌سازی متن، تحلیل متن، تبدیل تاریخ و تحلیل احساسات ساده.
 """
 
-__version__ = "0.3.0" # افزایش نسخه
+__version__ = "0.4.0" # افزایش نسخه
 
 from .numeral_converter import to_persian_numerals, to_english_numerals
 from .number_to_words import number_to_persian_words
 from .text_normalizer import (
     persian_text_normalizer,
-    # ... (بقیه import های text_normalizer)
+    normalize_characters,
+    cleanup_spacing,
+    standardize_quotes,
+    standardize_ellipsis,
+    add_zwnj_to_common_suffixes,
     ZWNJ
 )
 from .text_analyzer import count_words, count_sentences, count_paragraphs
-from .date_converter import ( # اضافه کردن ماژول جدید
+from .date_converter import (
     gregorian_to_jalali,
     jalali_to_gregorian,
     today_jalali,
@@ -24,34 +27,28 @@ from .date_converter import ( # اضافه کردن ماژول جدید
     DEFAULT_JALALI_FORMAT,
     COMMON_JALALI_FORMAT_WITH_DAY_NAME
 )
-
+from .sentiment_analyzer import ( # اضافه کردن ماژول جدید
+    analyze_sentiment_simple,
+    SentimentLabel, # اگر کاربران بخواهند از این تایپ استفاده کنند
+    SentimentScore
+)
 
 # توابعی که می‌خواهیم با from farsinum import * در دسترس باشند
 __all__ = [
     # Numeral Converter
-    "to_persian_numerals",
-    "to_english_numerals",
+    "to_persian_numerals", "to_english_numerals",
     # Number to Words
     "number_to_persian_words",
     # Text Normalizer
-    "persian_text_normalizer",
-    "normalize_characters", # اگر می‌خواهید اینها هم مستقیما قابل import باشند
-    "cleanup_spacing",
-    "standardize_quotes",
-    "standardize_ellipsis",
-    "add_zwnj_to_common_suffixes",
-    "ZWNJ",
+    "persian_text_normalizer", "normalize_characters", "cleanup_spacing",
+    "standardize_quotes", "standardize_ellipsis", "add_zwnj_to_common_suffixes", "ZWNJ",
     # Text Analyzer
-    "count_words",
-    "count_sentences",
-    "count_paragraphs",
+    "count_words", "count_sentences", "count_paragraphs",
     # Date Converter
-    "gregorian_to_jalali",
-    "jalali_to_gregorian",
-    "today_jalali",
-    "DEFAULT_GREGORIAN_FORMAT",
-    "DEFAULT_JALALI_FORMAT",
-    "COMMON_JALALI_FORMAT_WITH_DAY_NAME",
+    "gregorian_to_jalali", "jalali_to_gregorian", "today_jalali",
+    "DEFAULT_GREGORIAN_FORMAT", "DEFAULT_JALALI_FORMAT", "COMMON_JALALI_FORMAT_WITH_DAY_NAME",
+    # Sentiment Analyzer
+    "analyze_sentiment_simple", "SentimentLabel", "SentimentScore",
     # Version
     "__version__"
 ]
