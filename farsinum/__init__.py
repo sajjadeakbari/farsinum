@@ -50,6 +50,16 @@ from .seo_analyzer import ( # اضافه کردن ماژول جدید
     # RECOMMENDED_AVG_SENTENCE_LENGTH_MAX
 )
 
+from .seo_analyzer import (
+    SEOResult,
+    # ... (بقیه import های seo_analyzer)
+    run_seo_checklist_on_text,
+)
+from .longtail_keyword_generator import ( # اضافه کردن ماژول جدید
+    generate_longtail_keywords,
+    QUESTION_PREFIXES as DEFAULT_QUESTION_PREFIXES, # برای دسترسی کاربر به لیست‌های پیش‌فرض
+    COMMON_SUFFIXES as DEFAULT_COMMON_SUFFIXES
+)
 # توابعی که می‌خواهیم با from farsinum import * در دسترس باشند
 __all__ = [
     # Numeral Converter
