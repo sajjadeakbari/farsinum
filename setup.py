@@ -1,63 +1,69 @@
 # setup.py
-import setuptools
-import os
 
-# برای خواندن نسخه از __init__.py بدون وارد کردن کل پکیج
-def get_version(package_name):
-    version_path = os.path.join(package_name, "__init__.py")
-    with open(version_path, "r", encoding="utf-8") as fp:
-        for line in fp:
+from pathlib import Path
+import setuptools
+
+
+def get_version(package_name: str) -> str:
+    """
+    استخراج نسخه از فایل __init__.py داخل پکیج
+    """
+    version_file = Path(package_name) / "__init__.py"
+    with version_file.open(encoding="utf-8") as f:
+        for line in f:
             if line.startswith("__version__"):
                 return line.split("=")[1].strip().strip('"').strip("'")
-    return "0.0.0" # مقدار پیشفرض اگر پیدا نشد
+    return "0.0.0"  # مقدار پیش‌فرض در صورت عدم یافتن نسخه
 
-# خواندن محتوای README.md برای long_description
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
 
-VERSION = get_version("farsinum") # نام پوشه اصلی پکیج شما
+# خواندن توضیحات کامل از README.md
+long_description = Path("README.md").read_text(encoding="utf-8")
 
+# تعیین نسخه پکیج
+VERSION = get_version("farsinum")
+
+# تنظیمات پکیج
 setuptools.setup(
-    name="farsinum", # نام پکیج شما در PyPI
+    name="farsinum",
     version=VERSION,
-    author="Sajjad Akbari", # نام شما
-    author_email="sajjad.akbari.dev@gmail.com", # ایمیل شما
-    description="کتابخانه پایتون برای تبدیل اعداد فارسی به انگلیسی و برعکس، و تبدیل عدد به حروف فارسی.",
+    author="Sajjad Akbari",
+    author_email="sajjad.akbari.dev@gmail.com",
+    description=(
+        "کتابخانه پایتون برای تبدیل اعداد، نرمال‌سازی متن فارسی، "
+        "تحلیل ساده متن و تبدیل تاریخ میلادی به شمسی."
+    ),
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/sajjadeakbari/farsinum", # آدرس مخزن گیت‌هاب پروژه
-    project_urls={ # لینک‌های اضافی (اختیاری)
+    url="https://github.com/sajjadeakbari/farsinum",
+    project_urls={
         "Bug Tracker": "https://github.com/sajjadeakbari/farsinum/issues",
-        "Homepage": "https://sajjadakbari.ir", # اگر وبسایت شخصی یا پروژه دارید
+        "Homepage": "https://sajjadakbari.ir",
     },
-    packages=setuptools.find_packages(exclude=["tests", "tests.*"]), # پیدا کردن خودکار پکیج‌ها
-    # اگر پکیج شما به کتابخانه‌های دیگری نیاز دارد، اینجا لیست کنید:
-    # install_requires=[
-    #     "requests>=2.20.0",
-    # ],
+    packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
+    install_requires=[
+        "jdatetime>=2.0",  # حداقل نسخه مورد نیاز
+    ],
     classifiers=[
-        # وضعیت توسعه:
-        #   3 - Alpha
-        #   4 - Beta
-        #   5 - Production/Stable
-        "Development Status :: 4 - Beta", # یا 3 - Alpha برای شروع
-
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "Topic :: Text Processing :: Linguistic", # مرتبط با پردازش زبان
-        "Natural Language :: Persian", # مشخص کردن زبان فارسی
-
-        "License :: OSI Approved :: MIT License", # مجوز شما
-
+        "Topic :: Text Processing :: Linguistic",
+        "Topic :: Utilities",
+        "Natural Language :: Persian",
+        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: 3.12", # نسخه‌های پایتون پشتیبانی شده
-        "Operating System :: OS Independent", # مستقل از سیستم عامل
+        "Programming Language :: Python :: 3.12",
+        "Operating System :: OS Independent",
     ],
-    python_requires='>=3.7', # حداقل نسخه پایتون مورد نیاز
-    keywords="farsi, persian, numbers, numerals, convert, words, اعداد, فارسی, تبدیل, حروف", # کلمات کلیدی برای جستجو
+    python_requires=">=3.7",
+    keywords=(
+        "farsi, persian, numbers, numerals, text, normalize, analysis, date, "
+        "jalali, shamsi, convert, words, اعداد, فارسی, تبدیل, حروف, متن, "
+        "نرمال‌سازی, تحلیل, تاریخ, شمسی, جلالی"
+    ),
 )
