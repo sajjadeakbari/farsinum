@@ -1,0 +1,38 @@
+# .github/workflows/publish.yml
+
+name: Publish Python Package to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' # فقط زمانی اجرا شود که یک تگ با فرمت vX.Y.Z پوش شود
+
+jobs:
+  build-and-publish:
+    name: Build and publish Python distribution to PyPI
+    runs-on: ubuntu-latest # یا هر سیستم عامل دیگری که ترجیح می‌دهید
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9' # نسخه‌ای از پایتون برای ساخت
+
+    - name: Install build dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+
+    - name: Build package
+      run: python -m build
+
+    - name: Publish package to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__ # این مقدار باید همین باشد
+        password: ${{ secrets.PYPI_API_TOKEN }} # نام سکرت در گیت‌هاب
+        # repository_url: https://test.pypi.org/legacy/ # برای تست در TestPyPI، این خط را از کامنت خارج کنید
+        # skip_existing: true # اگر می‌خواهید از آپلود مجدد نسخه موجود جلوگیری کنید
