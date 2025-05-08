@@ -1,0 +1,5 @@
+# pyproject.toml
+[build-system]
+requires = ["setuptools>=42", "wheel"] # حداقل نیازمندی‌ها برای ساخت پکیج
+build-backend = "setuptools.build_meta"
+backend-path = ["."] # نشان می‌دهد که setuptools در همین مسیر است
