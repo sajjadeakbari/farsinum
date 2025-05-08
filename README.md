@@ -17,3 +17,19 @@
 
 ```bash
 pip install farsinum
+
+
+
+
+## نرمال‌سازی متن فارسی
+
+پکیج `farsinum` شامل توابعی برای پاک‌سازی و استانداردسازی متن‌های فارسی است.
+
+```python
+from farsinum import persian_text_normalizer, ZWNJ
+
+dirty_text = '  اين يك متن نمونه با كاراكترهاي عربي (ك، ي) و اعداد ١٢٣ و فاصله هاي اضافي است... كتاب ها "عالي" اند!  '
+normalized_text = persian_text_normalizer(dirty_text)
+print(normalized_text)
+# خروجی تقریبی (بسته به جزئیات پیاده‌سازی):
+# این یک متن نمونه با کاراکترهای عربی (ک، ی) و اعداد ۱۲۳ و فاصله های اضافی است… کتاب‌ها «عالی» اند!
